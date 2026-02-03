@@ -72,3 +72,35 @@ public class User implements DBType {
 User[] users = Utils.extractResults(rs, User.class);
 ```
 
+## Using this library
+
+To use this library, one may either build a `jar` distribution from the source with `./gradlew build`,
+or one may add this repository as a submodule of their project, and declare it as a child project in gradle:
+
+Add the submodule:
+
+```
+git submodule add https://github.com/Nathcat/Java-SQL Java-SQL
+```
+
+Declare the child project in your top-level gradle file:
+
+```kotlin
+// settings.gradle.kts
+
+...
+include(/* Your projects go here */, "Java-SQL")
+project(":Java-SQL").projectDir = file("Java-SQL/lib")
+```
+
+Add the child project as a dependency:
+
+```kotlin
+// build.gradle.kts
+
+dependencies {
+  /* Your dependencies here */
+
+  implementation(project(":Java-SQL"))
+}
+```
