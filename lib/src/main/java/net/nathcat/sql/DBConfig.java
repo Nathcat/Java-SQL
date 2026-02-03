@@ -17,4 +17,10 @@ public final class DBConfig {
    * The password to use to login to the database
    */
   public String password;
+
+  public DBConfig(String uri, String username, String password) {
+    this.uri = uri;
+    this.username = username;
+    this.password = password;
+  }
 }
