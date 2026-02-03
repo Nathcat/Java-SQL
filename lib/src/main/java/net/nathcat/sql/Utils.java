@@ -13,7 +13,6 @@ public final class Utils {
    * 
    * @param rs The result set
    * @param tC The class of the target DBType
-   * @returns An array of DBTypes specified by tC
    */
   @SuppressWarnings("unchecked")
   public static <T extends DBType> T[] extractResults(ResultSet rs, Class<T> tC)
