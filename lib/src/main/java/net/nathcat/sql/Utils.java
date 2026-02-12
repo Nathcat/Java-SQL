@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 
 public final class Utils {
   /**
@@ -32,5 +33,22 @@ public final class Utils {
     }
 
     return l.toArray((T[]) Array.newInstance(tC, 0));
+  }
+
+  /**
+   * Convert a map object to a DBType.
+   *
+   * @param map The map to convert
+   * @param tC  The target class to convert the map to
+   */
+  private static <T extends DBType> T mapToDBType(Map<String, Object> map, Class<T> tC)
+      throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException,
+      InstantiationException, InvocationTargetException, NoSuchMethodException {
+    T obj = tC.getConstructor().newInstance();
+    for (String key : map.keySet()) {
+      tC.getField((String) key).set(obj, map.get(key));
+    }
+
+    return obj;
   }
 }
