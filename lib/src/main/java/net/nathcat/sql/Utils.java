@@ -41,7 +41,7 @@ public final class Utils {
    * @param map The map to convert
    * @param tC  The target class to convert the map to
    */
-  private static <T extends DBType> T mapToDBType(Map<String, Object> map, Class<T> tC)
+  public static <T extends DBType> T mapToDBType(Map<String, Object> map, Class<T> tC)
       throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException,
       InstantiationException, InvocationTargetException, NoSuchMethodException {
     T obj = tC.getConstructor().newInstance();
