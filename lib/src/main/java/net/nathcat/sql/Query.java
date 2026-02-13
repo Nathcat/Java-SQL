@@ -27,6 +27,8 @@ public class Query {
       return PreparedStatement.class.getMethod("setString", Integer.class, String.class);
     } else if (c == Boolean.class) {
       return PreparedStatement.class.getMethod("setBoolean", Integer.class, Boolean.class);
+    } else if (c == Long.class) {
+      return PreparedStatement.class.getMethod("setLong", Integer.class, Long.class);
     } else {
 
       throw new NoSuchMethodException("No setter found for type " + c.getName());
@@ -54,6 +56,21 @@ public class Query {
 
   public void execute() throws SQLException {
     stmt.execute();
+  }
+
+  /**
+   * Execute an update query.
+   *
+   * @return If any keys were generated for the query, this key will be returned.
+   */
+  public int executeUpdate() throws SQLException {
+    stmt.executeUpdate();
+    ResultSet rs = stmt.getGeneratedKeys();
+    if (rs.next()) {
+      return rs.getInt(1);
+    }
+
+    return -1;
   }
 
   public ResultSet getResultSet() throws SQLException {

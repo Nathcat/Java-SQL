@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 
 public class Database {
@@ -29,7 +31,7 @@ public class Database {
    */
   public Query newQuery(String sql) throws SQLException {
     try {
-      return new Query(conn.prepareStatement(sql));
+      return new Query(conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS));
     } catch (CommunicationsException e) {
       connect();
       return newQuery(sql);
