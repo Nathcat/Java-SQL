@@ -42,11 +42,14 @@ public final class Utils {
    * @param tC  The target class to convert the map to
    */
   public static <T extends DBType> T mapToDBType(Map<String, Object> map, Class<T> tC)
-      throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException,
+      throws IllegalArgumentException, IllegalAccessException, SecurityException,
       InstantiationException, InvocationTargetException, NoSuchMethodException {
     T obj = tC.getConstructor().newInstance();
     for (String key : map.keySet()) {
-      tC.getField((String) key).set(obj, map.get(key));
+      try {
+        tC.getField((String) key).set(obj, map.get(key));
+      } catch (NoSuchFieldException ignore) {
+      }
     }
 
     return obj;
