@@ -14,6 +14,7 @@ public class Database {
 
   public Database(DBConfig config) {
     this.config = config;
+    connect();
   }
 
   /**
