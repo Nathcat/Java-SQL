@@ -19,7 +19,7 @@ public class Database {
   /**
    * Connect to the configured database. See {@link DBConfig} for configuration.
    */
-  private void connect() throws SQLException {
+  public void connect() throws SQLException {
     conn = DriverManager.getConnection(config.uri, config.username, config.password);
   }
 
