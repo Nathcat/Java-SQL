@@ -22,13 +22,13 @@ public class Query {
    */
   private <T> Method getSetter(Class<T> c) throws NoSuchMethodException {
     if (c == Integer.class) {
-      return PreparedStatement.class.getMethod("setInt", Integer.class, Integer.class);
+      return PreparedStatement.class.getMethod("setInt", int.class, int.class);
     } else if (c == String.class) {
-      return PreparedStatement.class.getMethod("setString", Integer.class, String.class);
+      return PreparedStatement.class.getMethod("setString", int.class, String.class);
     } else if (c == Boolean.class) {
-      return PreparedStatement.class.getMethod("setBoolean", Integer.class, Boolean.class);
+      return PreparedStatement.class.getMethod("setBoolean", int.class, boolean.class);
     } else if (c == Long.class) {
-      return PreparedStatement.class.getMethod("setLong", Integer.class, Long.class);
+      return PreparedStatement.class.getMethod("setLong", int.class, long.class);
     } else {
 
       throw new NoSuchMethodException("No setter found for type " + c.getName());
