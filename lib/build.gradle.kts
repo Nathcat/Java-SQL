@@ -8,11 +8,33 @@
 plugins {
     // Apply the java-library plugin for API and implementation separation.
     `java-library`
+    `maven-publish`
 }
 
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "nathcatRepo"
+            url = uri("https://mvn.nathcat.net/releases")
+            credentials(PasswordCredentials::class)
+            authentication {
+                create<BasicAuthentication>("basic")
+            }
+        }
+    }
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "net.nathcat"
+            artifactId = "sql"
+            version = "1.0.0"
+            from(components["java"])
+        }
+    }
 }
 
 dependencies {
